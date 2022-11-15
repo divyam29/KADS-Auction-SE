@@ -29,10 +29,9 @@ def patientotpSignup(request):
         # print(profile[0].otp)
         # print(profile[0].uid)
         if not profile.exists():
-            return render(request=request,
-                          template_name="auctions/login.html",)
+            return render(request=request, template_name="auctions/login.html",)
         user_profile = profile[0]
-        gen_otp = random.randint(1000, 9999)
+        gen_otp = random.randint(100000, 999999)
         user_profile.otp = gen_otp
         message_handler = Messahandler(
             f'+91{phone_number}',   user_profile.otp).send_otp_on_phone()

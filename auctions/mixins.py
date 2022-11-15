@@ -1,6 +1,7 @@
 from django.conf import settings
 from twilio.rest import Client
 import random
+from .config import acc_sid,auth_token
 
 class Messahandler:
     phone_number = None
@@ -12,7 +13,7 @@ class Messahandler:
 
 
     def send_otp_on_phone(self):
-        client = Client('AC16a0e04dcee111f6d60177f94ea7d0ab','412836f9276a34915919b1585e10ed43')
+        client = Client(acc_sid,auth_token)
         message = client.messages.create(
             body=f'Your otp is {self.otp}',
             from_='+17262275861',
