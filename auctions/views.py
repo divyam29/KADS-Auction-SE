@@ -1,21 +1,60 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from .models import User, Auction, Bid, Category, Comment, Watchlist
+from auctions.mixins import Messahandler
+
+from .models import *
 from .forms import NewCommentForm, NewListingForm, NewBidForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
+import random
 
 
 def index(request):
     return render(request, "auctions/index.html", {
         "auctions": Auction.objects.filter(closed=False).order_by('-creation_date')
     })
-  
+
+
+def patientotpSignup(request):
+    if request.method == 'POST':
+        phone_number = request.POST['phone']
+        profile = Profile.objects.filter(contact_no=phone_number)
+
+        # print(profile[0])
+        # print(profile[0].otp)
+        # print(profile[0].uid)
+        if not profile.exists():
+            return render(request=request,
+                          template_name="auctions/login.html",)
+        user_profile = profile[0]
+        gen_otp = random.randint(1000, 9999)
+        user_profile.otp = gen_otp
+        message_handler = Messahandler(
+            f'+91{phone_number}',   user_profile.otp).send_otp_on_phone()
+        user_profile.uid = message_handler
+        user_profile.save()
+        context = {
+            'otp': gen_otp,
+            'phone_number': phone_number
+        }
+        return redirect(f'/otp/{user_profile.uid}/')
+
+
+def otplogin(request, uid):
+    if request.method == 'POST':
+        otp = request.POST['otp']
+        user_profile = Profile.objects.get(uid=uid)
+        if otp == user_profile.otp:
+            login(request, user_profile.user,
+                  backend='django.contrib.auth.backends.ModelBackend')
+            return HttpResponseRedirect(reverse("index"))
+        return redirect(f'/otp/{uid}')
+    return render(request, 'auctions/otplogin.html')
 
 
 def login_view(request):
@@ -30,7 +69,8 @@ def login_view(request):
         if user is not None:
             login(request, user)
             # return sucessful message
-            messages.success(request, f'Welcome, {username}. Login successfully.')
+            messages.success(
+                request, f'Welcome, {username}. Login successfully.')
 
             return HttpResponseRedirect(reverse("index"))
         else:
@@ -50,6 +90,7 @@ def register(request):
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
+        phone_no = request.POST["phone"]
 
         # Ensure password matches confirmation
         password = request.POST["password"]
@@ -63,6 +104,11 @@ def register(request):
         try:
             user = User.objects.create_user(username, email, password)
             user.save()
+            buyer = Profile(user=user)
+            # print(patient)
+            buyer.user_name = username
+            buyer.contact_no = phone_no
+            buyer.save()
         except IntegrityError:
             return render(request, "auctions/register.html", {
                 "message": "Username already taken."
@@ -82,14 +128,15 @@ def categories(request):
 def category(request, category_id):
     try:
         # get a list of all active listing of the category
-        auctions = Auction.objects.filter(category=category_id, closed=False).order_by('-creation_date')
-         
+        auctions = Auction.objects.filter(
+            category=category_id, closed=False).order_by('-creation_date')
+
     except Auction.DoesNotExist:
         return render(request, "auctions/error.html", {
             "code": 404,
             "message": f"The category does not exist."
         })
-   
+
     try:
         # get the category
         category = Category.objects.get(pk=category_id)
@@ -106,7 +153,7 @@ def category(request, category_id):
     })
 
 
-@login_required(login_url="login") 
+@login_required(login_url="login")
 def watchlist(request):
     # check the existance of the user's watchlist
     try:
@@ -120,7 +167,6 @@ def watchlist(request):
         watchlist = None
         auctions = None
         watchingNum = 0
-    
 
     return render(request, "auctions/watchlist.html", {
         # return the listings in the watchlist
@@ -148,7 +194,8 @@ def create(request):
             new_listing.save()
 
             # return sucessful message
-            messages.success(request, 'Create the auction listing successfully.')
+            messages.success(
+                request, 'Create the auction listing successfully.')
 
             # redirect the user to the index page
             return HttpResponseRedirect(reverse("index"))
@@ -161,7 +208,7 @@ def create(request):
             return render(request, "auctions/create.html", {
                 "form": form
             })
-    
+
     # if the request method is GET
     else:
         form = NewListingForm()
@@ -170,11 +217,11 @@ def create(request):
         })
 
 
-def listing(request, auction_id):  
+def listing(request, auction_id):
     try:
         # get the auction listing by id
         auction = Auction.objects.get(pk=auction_id)
-        
+
     except Auction.DoesNotExist:
         return render(request, "auctions/error.html", {
             "code": 404,
@@ -183,13 +230,13 @@ def listing(request, auction_id):
 
     # set watching flag be False as default
     watching = False
-    # set the highest bidder is None as default    
+    # set the highest bidder is None as default
     highest_bidder = None
 
     # check if the auction in the watchlist
     if request.user.is_authenticated and Watchlist.objects.filter(user=request.user, auctions=auction):
         watching = True
-    
+
     # get the page request user
     user = request.user
 
@@ -200,8 +247,9 @@ def listing(request, auction_id):
     comments = Comment.objects.filter(auction=auction_id).order_by("-cm_date")
 
     # get the highest bids of the aunction
-    highest_bid = Bid.objects.filter(auction=auction_id).order_by("-bid_price").first()
-    
+    highest_bid = Bid.objects.filter(
+        auction=auction_id).order_by("-bid_price").first()
+
     # check the request method is POST
     if request.method == "GET":
         form = NewBidForm()
@@ -210,14 +258,14 @@ def listing(request, auction_id):
         # check if the auction listing is not closed
         if not auction.closed:
             return render(request, "auctions/listing.html", {
-            "auction": auction,
-            "form": form,
-            "user": user,
-            "bid_Num": bid_Num,
-            "commentForm": commentForm,
-            "comments": comments,
-            "watching": watching
-            }) 
+                "auction": auction,
+                "form": form,
+                "user": user,
+                "bid_Num": bid_Num,
+                "commentForm": commentForm,
+                "comments": comments,
+                "watching": watching
+            })
 
         # the auction is closed
         else:
@@ -240,32 +288,31 @@ def listing(request, auction_id):
                 # assign the highest_bidder
                 highest_bidder = highest_bid.bider
 
-                # check the request user if the bid winner    
+                # check the request user if the bid winner
                 if user == highest_bidder:
                     messages.info(request, 'Congratulation. You won the bid.')
                 else:
-                    messages.info(request, f'The winner of the bid is {highest_bidder.username}')
+                    messages.info(
+                        request, f'The winner of the bid is {highest_bidder.username}')
 
                 return render(request, "auctions/listing.html", {
-                "auction": auction,
-                "form": form,
-                "user": user,
-                "highest_bidder": highest_bidder,
-                "bid_Num": bid_Num,
-                "commentForm": commentForm,
-                "comments": comments,
-                "watching": watching
+                    "auction": auction,
+                    "form": form,
+                    "user": user,
+                    "highest_bidder": highest_bidder,
+                    "bid_Num": bid_Num,
+                    "commentForm": commentForm,
+                    "comments": comments,
+                    "watching": watching
                 })
 
-    
     # listing itself does not support POST method
     else:
         return render(request, "auctions/error.html", {
             "code": 405,
             "message": "The POST method is not allowed."
         })
-        
-        
+
 
 @login_required(login_url="login")
 def close(request, auction_id):
@@ -291,28 +338,29 @@ def close(request, auction_id):
             # update and save the closed status
             auction.closed = True
             auction.save()
-            
+
             # pop up the message
-            messages.success(request, 'The auction listing is closed sucessfully.')
+            messages.success(
+                request, 'The auction listing is closed sucessfully.')
             return HttpResponseRedirect(reverse("listing", args=(auction.id,)))
 
-    # close view not support GET method    
+    # close view not support GET method
     else:
         return render(request, "auctions/error.html", {
             "code": 405,
             "message": "The GET method is not allowed."
         })
-        
+
 
 @login_required(login_url="login")
-def bid(request, auction_id):  
+def bid(request, auction_id):
     # check to handle POST method only
     if request.method == "POST":
         # check the existence auction
         try:
             # get the auction listing by id
-            auction = Auction.objects.get(pk=auction_id)     
-            
+            auction = Auction.objects.get(pk=auction_id)
+
         except Auction.DoesNotExist:
             return render(request, "auctions/error.html", {
                 "code": 404,
@@ -320,7 +368,8 @@ def bid(request, auction_id):
             })
 
         # get the highest bid of the aunction
-        highest_bid = Bid.objects.filter(auction=auction_id).order_by("-bid_price").first()
+        highest_bid = Bid.objects.filter(
+            auction=auction_id).order_by("-bid_price").first()
 
         # check if there is any bid
         if highest_bid is None:
@@ -334,8 +383,8 @@ def bid(request, auction_id):
         # check the auction if it is closed
         if auction.closed is True:
             messages.error(request, 'The auction listing is closed.')
-            return HttpResponseRedirect(reverse("listing", args=(auction.id,))) 
-        
+            return HttpResponseRedirect(reverse("listing", args=(auction.id,)))
+
         # the auction list is active
         else:
             # check whether it's valid
@@ -358,23 +407,26 @@ def bid(request, auction_id):
                     auction.save()
 
                     # return sucessful message
-                    messages.success(request, 'Your Bid offer is made successfully.')
+                    messages.success(
+                        request, 'Your Bid offer is made successfully.')
 
                 # handle invalid bid offer
                 else:
-                    #if the bid is invalid, populate the msg
-                    messages.error(request, 'Please submit a valid bid offer. Your bid offer must be higher than the starting bid and current price.')
+                    # if the bid is invalid, populate the msg
+                    messages.error(
+                        request, 'Please submit a valid bid offer. Your bid offer must be higher than the starting bid and current price.')
 
-                # valid form, redirect the user to the listing page 
-                return HttpResponseRedirect(reverse("listing", args=(auction.id,)))    
+                # valid form, redirect the user to the listing page
+                return HttpResponseRedirect(reverse("listing", args=(auction.id,)))
 
             else:
                 # if the form is invalid, re-render the page with existing information
-                messages.error(request, 'Please submit a valid bid offer. Your bid offer must be higher than the starting bid and current price.')
+                messages.error(
+                    request, 'Please submit a valid bid offer. Your bid offer must be higher than the starting bid and current price.')
 
                 # redirect the user to the listing page
                 return HttpResponseRedirect(reverse("listing", args=(auction.id,)))
-    
+
     # bid view do not support get method
     else:
         return render(request, "auctions/error.html", {
@@ -391,14 +443,14 @@ def comment(request, auction_id):
         # check the existence auction
         try:
             # get the auction listing by id
-            auction = Auction.objects.get(pk=auction_id)     
-            
+            auction = Auction.objects.get(pk=auction_id)
+
         except Auction.DoesNotExist:
             return render(request, "auctions/error.html", {
                 "code": 404,
                 "message": "The auction does not exist."
             })
-            
+
         # create a form instance with POST data
         form = NewCommentForm(request.POST, request.FILES)
 
@@ -416,12 +468,12 @@ def comment(request, auction_id):
             messages.success(request, 'Your comment is received sucessfully.')
 
             return HttpResponseRedirect(reverse("listing", args=(auction.id,)))
-        
+
         # handle invalid comment form
         else:
             # if the form is invalid
             messages.error(request, 'Please submit a valid comment.')
-     
+
     # comment view do not support get method
     else:
         return render(request, "auctions/error.html", {
@@ -431,14 +483,14 @@ def comment(request, auction_id):
 
 
 @login_required(login_url="login")
-def addWatchlist(request, auction_id):   
+def addWatchlist(request, auction_id):
     # check to handle POST method only
     if request.method == "POST":
         # check the existence auction
         try:
             # get the auction listing by id
-            auction = Auction.objects.get(pk=auction_id)     
-            
+            auction = Auction.objects.get(pk=auction_id)
+
         except Auction.DoesNotExist:
             return render(request, "auctions/error.html", {
                 "code": 404,
@@ -452,7 +504,7 @@ def addWatchlist(request, auction_id):
         except ObjectDoesNotExist:
             # if no watchlist, create an watchlist object for the user
             watchlist = Watchlist.objects.create(user=request.user)
-        
+
         # check if the item exists in the user's watchlist
         if Watchlist.objects.filter(user=request.user, auctions=auction):
             messages.error(request, 'You already added in your watchlist')
@@ -460,13 +512,12 @@ def addWatchlist(request, auction_id):
 
         # if the item is not in the watchlist
         watchlist.auctions.add(auction)
-            
+
         # return sucessful message
         messages.success(request, 'The listing is added to your Watchlist.')
 
         return HttpResponseRedirect(reverse("listing", args=(auction.id,)))
-        
-     
+
     # addWatchlist view do not support get method
     else:
         return render(request, "auctions/error.html", {
@@ -476,40 +527,41 @@ def addWatchlist(request, auction_id):
 
 
 @login_required(login_url="login")
-def removeWatchlist(request, auction_id):   
+def removeWatchlist(request, auction_id):
     # check to handle POST method only
     if request.method == "POST":
         # check the existence auction
         try:
             # get the auction listing by id
-            auction = Auction.objects.get(pk=auction_id)     
-            
+            auction = Auction.objects.get(pk=auction_id)
+
         except Auction.DoesNotExist:
             return render(request, "auctions/error.html", {
                 "code": 404,
                 "message": "The auction does not exist."
             })
-        
+
         # check if the item exists in the user's watchlist
         if Watchlist.objects.filter(user=request.user, auctions=auction):
             # get the user's watchlist
             watchlist = Watchlist.objects.get(user=request.user)
-           
+
             # delete the auction from the users watchlist
             watchlist.auctions.remove(auction)
-                
+
             # return sucessful message
-            messages.success(request, 'The listing is removed from your watchlist.')
+            messages.success(
+                request, 'The listing is removed from your watchlist.')
 
             return HttpResponseRedirect(reverse("listing", args=(auction.id,)))
-        
+
         else:
             # return error message
-            messages.success(request, 'You cannot remove the listing not in your watchlist.')
+            messages.success(
+                request, 'You cannot remove the listing not in your watchlist.')
 
             return HttpResponseRedirect(reverse("listing", args=(auction.id,)))
-   
-     
+
     # removeWatchlist view do not support get method
     else:
         return render(request, "auctions/error.html", {
@@ -517,13 +569,6 @@ def removeWatchlist(request, auction_id):
             "message": "The GET method is not allowed."
         })
 
+
 def user(request):
-    return render(request,"auctions/user.html")  
-
-
-
-
-
-
-
-
+    return render(request, "auctions/user.html")

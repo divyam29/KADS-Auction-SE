@@ -1,0 +1,22 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+{% if message %}
+<div>{{ message }}</div>
+{% endif %}
+
+<h2 class="mx-3 mb-3">Login</h2>
+
+<br>
+
+<form id="login_with_otp" class="my-5 mx-4 w-75" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <input autofocus class="form-control" type="text" name="otp" placeholder="Enter OTP">
+    </div>
+    <input class="btn btn-primary w-50" type="submit" value="Login">
+</form>
+
+
+{% endblock %}
