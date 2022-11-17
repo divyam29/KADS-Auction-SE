@@ -17,6 +17,7 @@ urlpatterns = [
     path("categories", views.categories, name="categories"),
     path("categories/<int:category_id>", views.category, name="category"),
     path("watchlist", views.watchlist, name="watchlist"),
+    path("payment", views.payment, name="payment"),
     path("user", views.user, name="user"),
     path('otp-login/', views.patientotpSignup, name='otp-login'),
     path('otp/<uid>/', views.otplogin, name='otp'),

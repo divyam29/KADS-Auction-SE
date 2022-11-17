@@ -174,6 +174,13 @@ def watchlist(request):
         "watchingNum": watchingNum
     })
 
+@login_required(login_url="login")
+def payment(request):
+    return render(request, "auctions/payment.html", {
+        "auction": Auction.objects.filter(closed=False).order_by('-creation_date').first(),
+        "user":request.user,
+    })
+
 
 @login_required(login_url="login")
 def create(request):

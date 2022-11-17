@@ -40,7 +40,7 @@
             ;
         }
     </style>
-
+    {% block head %}{% endblock %}
 </head>
 
 <body>
@@ -80,6 +80,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'watchlist' %}">My watchlist</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'payment' %}">Payment</a>
             </li>
             {% endif %}
         </ul>
