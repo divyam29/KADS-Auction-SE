@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{eaccc2ab-cbbe-4aba-a2ac-bb60226f616c}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>manage.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>MSBuild|venv|$(MSBuildProjectFullPath)</InterpreterId>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="auctions\static\admin\css\autocomplete.css" />
+    <Content Include="auctions\static\admin\css\base.css" />
+    <Content Include="auctions\static\admin\css\changelists.css" />
+    <Content Include="auctions\static\admin\css\dashboard.css" />
+    <Content Include="auctions\static\admin\css\fonts.css" />
+    <Content Include="auctions\static\admin\css\forms.css" />
+    <Content Include="auctions\static\admin\css\login.css" />
+    <Content Include="auctions\static\admin\css\nav_sidebar.css" />
+    <Content Include="auctions\static\admin\css\responsive.css" />
+    <Content Include="auctions\static\admin\css\responsive_rtl.css" />
+    <Content Include="auctions\static\admin\css\rtl.css" />
+    <Content Include="auctions\static\admin\css\vendor\select2\select2.css" />
+    <Content Include="auctions\static\admin\css\vendor\select2\select2.min.css" />
+    <Content Include="auctions\static\admin\css\widgets.css" />
+    <Content Include="auctions\static\admin\fonts\LICENSE.txt" />
+    <Content Include="auctions\static\admin\fonts\README.txt" />
+    <Content Include="auctions\static\admin\img\calendar-icons.svg" />
+    <Content Include="auctions\static\admin\img\gis\move_vertex_off.svg" />
+    <Content Include="auctions\static\admin\img\gis\move_vertex_on.svg" />
+    <Content Include="auctions\static\admin\img\icon-addlink.svg" />
+    <Content Include="auctions\static\admin\img\icon-alert.svg" />
+    <Content Include="auctions\static\admin\img\icon-calendar.svg" />
+    <Content Include="auctions\static\admin\img\icon-changelink.svg" />
+    <Content Include="auctions\static\admin\img\icon-clock.svg" />
+    <Content Include="auctions\static\admin\img\icon-deletelink.svg" />
+    <Content Include="auctions\static\admin\img\icon-no.svg" />
+    <Content Include="auctions\static\admin\img\icon-unknown-alt.svg" />
+    <Content Include="auctions\static\admin\img\icon-unknown.svg" />
+    <Content Include="auctions\static\admin\img\icon-viewlink.svg" />
+    <Content Include="auctions\static\admin\img\icon-yes.svg" />
+    <Content Include="auctions\static\admin\img\inline-delete.svg" />
+    <Content Include="auctions\static\admin\img\README.txt" />
+    <Content Include="auctions\static\admin\img\search.svg" />
+    <Content Include="auctions\static\admin\img\selector-icons.svg" />
+    <Content Include="auctions\static\admin\img\sorting-icons.svg" />
+    <Content Include="auctions\static\admin\img\tooltag-add.svg" />
+    <Content Include="auctions\static\admin\img\tooltag-arrowright.svg" />
+    <Content Include="auctions\static\admin\js\actions.js" />
+    <Content Include="auctions\static\admin\js\admin\DateTimeShortcuts.js" />
+    <Content Include="auctions\static\admin\js\admin\RelatedObjectLookups.js" />
+    <Content Include="auctions\static\admin\js\autocomplete.js" />
+    <Content Include="auctions\static\admin\js\calendar.js" />
+    <Content Include="auctions\static\admin\js\cancel.js" />
+    <Content Include="auctions\static\admin\js\change_form.js" />
+    <Content Include="auctions\static\admin\js\collapse.js" />
+    <Content Include="auctions\static\admin\js\core.js" />
+    <Content Include="auctions\static\admin\js\inlines.js" />
+    <Content Include="auctions\static\admin\js\jquery.init.js" />
+    <Content Include="auctions\static\admin\js\nav_sidebar.js" />
+    <Content Include="auctions\static\admin\js\popup_response.js" />
+    <Content Include="auctions\static\admin\js\prepopulate.js" />
+    <Content Include="auctions\static\admin\js\prepopulate_init.js" />
+    <Content Include="auctions\static\admin\js\SelectBox.js" />
+    <Content Include="auctions\static\admin\js\SelectFilter2.js" />
+    <Content Include="auctions\static\admin\js\urlify.js" />
+    <Content Include="auctions\static\admin\js\vendor\jquery\jquery.js" />
+    <Content Include="auctions\static\admin\js\vendor\jquery\jquery.min.js" />
+    <Content Include="auctions\static\admin\js\vendor\jquery\LICENSE.txt" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\af.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\ar.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\az.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\bg.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\bn.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\bs.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\ca.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\cs.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\da.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\de.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\dsb.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\el.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\en.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\es.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\et.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\eu.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\fa.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\fi.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\fr.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\gl.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\he.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\hi.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\hr.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\hsb.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\hu.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\hy.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\id.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\is.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\it.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\ja.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\ka.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\km.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\ko.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\lt.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\lv.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\mk.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\ms.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\nb.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\ne.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\nl.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\pl.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\ps.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\pt-BR.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\pt.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\ro.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\ru.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\sk.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\sl.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\sq.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\sr-Cyrl.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\sr.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\sv.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\th.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\tk.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\tr.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\uk.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\vi.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\zh-CN.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\i18n\zh-TW.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\select2.full.js" />
+    <Content Include="auctions\static\admin\js\vendor\select2\select2.full.min.js" />
+    <Content Include="auctions\static\admin\js\vendor\xregexp\LICENSE.txt" />
+    <Content Include="auctions\static\admin\js\vendor\xregexp\xregexp.js" />
+    <Content Include="auctions\static\admin\js\vendor\xregexp\xregexp.min.js" />
+    <Content Include="auctions\static\auctions\payment.css" />
+    <Content Include="auctions\static\auctions\styles.css" />
+    <Content Include="auctions\templates\auctions\categories.html" />
+    <Content Include="auctions\templates\auctions\category.html" />
+    <Content Include="auctions\templates\auctions\create.html" />
+    <Content Include="auctions\templates\auctions\error.html" />
+    <Content Include="auctions\templates\auctions\index.html" />
+    <Content Include="auctions\templates\auctions\layout.html" />
+    <Content Include="auctions\templates\auctions\listing.html" />
+    <Content Include="auctions\templates\auctions\login.html" />
+    <Content Include="auctions\templates\auctions\otplogin.html" />
+    <Content Include="auctions\templates\auctions\payment.html" />
+    <Content Include="auctions\templates\auctions\register.html" />
+    <Content Include="auctions\templates\auctions\user.html" />
+    <Content Include="auctions\templates\auctions\watchlist.html" />
+    <Content Include="requirements.txt" />
+    <Content Include="staticfiles\admin\css\autocomplete.css" />
+    <Content Include="staticfiles\admin\css\base.css" />
+    <Content Include="staticfiles\admin\css\changelists.css" />
+    <Content Include="staticfiles\admin\css\dashboard.css" />
+    <Content Include="staticfiles\admin\css\fonts.css" />
+    <Content Include="staticfiles\admin\css\forms.css" />
+    <Content Include="staticfiles\admin\css\login.css" />
+    <Content Include="staticfiles\admin\css\nav_sidebar.css" />
+    <Content Include="staticfiles\admin\css\responsive.css" />
+    <Content Include="staticfiles\admin\css\responsive_rtl.css" />
+    <Content Include="staticfiles\admin\css\rtl.css" />
+    <Content Include="staticfiles\admin\css\vendor\select2\select2.css" />
+    <Content Include="staticfiles\admin\css\vendor\select2\select2.min.css" />
+    <Content Include="staticfiles\admin\css\widgets.css" />
+    <Content Include="staticfiles\admin\fonts\LICENSE.txt" />
+    <Content Include="staticfiles\admin\fonts\README.txt" />
+    <Content Include="staticfiles\admin\img\calendar-icons.svg" />
+    <Content Include="staticfiles\admin\img\gis\move_vertex_off.svg" />
+    <Content Include="staticfiles\admin\img\gis\move_vertex_on.svg" />
+    <Content Include="staticfiles\admin\img\icon-addlink.svg" />
+    <Content Include="staticfiles\admin\img\icon-alert.svg" />
+    <Content Include="staticfiles\admin\img\icon-calendar.svg" />
+    <Content Include="staticfiles\admin\img\icon-changelink.svg" />
+    <Content Include="staticfiles\admin\img\icon-clock.svg" />
+    <Content Include="staticfiles\admin\img\icon-deletelink.svg" />
+    <Content Include="staticfiles\admin\img\icon-no.svg" />
+    <Content Include="staticfiles\admin\img\icon-unknown-alt.svg" />
+    <Content Include="staticfiles\admin\img\icon-unknown.svg" />
+    <Content Include="staticfiles\admin\img\icon-viewlink.svg" />
+    <Content Include="staticfiles\admin\img\icon-yes.svg" />
+    <Content Include="staticfiles\admin\img\inline-delete.svg" />
+    <Content Include="staticfiles\admin\img\README.txt" />
+    <Content Include="staticfiles\admin\img\search.svg" />
+    <Content Include="staticfiles\admin\img\selector-icons.svg" />
+    <Content Include="staticfiles\admin\img\sorting-icons.svg" />
+    <Content Include="staticfiles\admin\img\tooltag-add.svg" />
+    <Content Include="staticfiles\admin\img\tooltag-arrowright.svg" />
+    <Content Include="staticfiles\admin\js\actions.js" />
+    <Content Include="staticfiles\admin\js\admin\DateTimeShortcuts.js" />
+    <Content Include="staticfiles\admin\js\admin\RelatedObjectLookups.js" />
+    <Content Include="staticfiles\admin\js\autocomplete.js" />
+    <Content Include="staticfiles\admin\js\calendar.js" />
+    <Content Include="staticfiles\admin\js\cancel.js" />
+    <Content Include="staticfiles\admin\js\change_form.js" />
+    <Content Include="staticfiles\admin\js\collapse.js" />
+    <Content Include="staticfiles\admin\js\core.js" />
+    <Content Include="staticfiles\admin\js\inlines.js" />
+    <Content Include="staticfiles\admin\js\jquery.init.js" />
+    <Content Include="staticfiles\admin\js\nav_sidebar.js" />
+    <Content Include="staticfiles\admin\js\popup_response.js" />
+    <Content Include="staticfiles\admin\js\prepopulate.js" />
+    <Content Include="staticfiles\admin\js\prepopulate_init.js" />
+    <Content Include="staticfiles\admin\js\SelectBox.js" />
+    <Content Include="staticfiles\admin\js\SelectFilter2.js" />
+    <Content Include="staticfiles\admin\js\urlify.js" />
+    <Content Include="staticfiles\admin\js\vendor\jquery\jquery.js" />
+    <Content Include="staticfiles\admin\js\vendor\jquery\jquery.min.js" />
+    <Content Include="staticfiles\admin\js\vendor\jquery\LICENSE.txt" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\af.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\ar.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\az.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\bg.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\bn.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\bs.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\ca.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\cs.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\da.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\de.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\dsb.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\el.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\en.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\es.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\et.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\eu.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\fa.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\fi.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\fr.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\gl.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\he.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\hi.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\hr.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\hsb.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\hu.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\hy.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\id.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\is.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\it.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\ja.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\ka.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\km.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\ko.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\lt.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\lv.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\mk.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\ms.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\nb.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\ne.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\nl.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\pl.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\ps.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\pt-BR.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\pt.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\ro.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\ru.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\sk.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\sl.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\sq.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\sr-Cyrl.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\sr.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\sv.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\th.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\tk.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\tr.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\uk.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\vi.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\zh-CN.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\i18n\zh-TW.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\select2.full.js" />
+    <Content Include="staticfiles\admin\js\vendor\select2\select2.full.min.js" />
+    <Content Include="staticfiles\admin\js\vendor\xregexp\LICENSE.txt" />
+    <Content Include="staticfiles\admin\js\vendor\xregexp\xregexp.js" />
+    <Content Include="staticfiles\admin\js\vendor\xregexp\xregexp.min.js" />
+    <Content Include="staticfiles\auctions\styles.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="auctions\admin.py" />
+    <Compile Include="auctions\apps.py" />
+    <Compile Include="auctions\config.py" />
+    <Compile Include="auctions\forms.py" />
+    <Compile Include="auctions\migrations\0001_initial.py" />
+    <Compile Include="auctions\migrations\0002_auto_20220612_0149.py" />
+    <Compile Include="auctions\migrations\0003_auction_current_bid.py" />
+    <Compile Include="auctions\migrations\0004_rename_comment_comment_message.py" />
+    <Compile Include="auctions\migrations\0005_auto_20220616_1623.py" />
+    <Compile Include="auctions\migrations\0006_rename_auction_watchlist_auctions.py" />
+    <Compile Include="auctions\migrations\0007_alter_watchlist_user.py" />
+    <Compile Include="auctions\migrations\0008_profile.py" />
+    <Compile Include="auctions\migrations\__init__.py" />
+    <Compile Include="auctions\mixins.py" />
+    <Compile Include="auctions\models.py" />
+    <Compile Include="auctions\tests.py" />
+    <Compile Include="auctions\urls.py" />
+    <Compile Include="auctions\views.py" />
+    <Compile Include="auctions\__init__.py" />
+    <Compile Include="commerce\asgi.py" />
+    <Compile Include="commerce\settings.py" />
+    <Compile Include="commerce\urls.py" />
+    <Compile Include="commerce\wsgi.py" />
+    <Compile Include="commerce\__init__.py" />
+    <Compile Include="manage.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="auctions" />
+    <Folder Include="auctions\migrations" />
+    <Folder Include="auctions\static\admin\css" />
+    <Folder Include="auctions\static\admin\css\vendor\select2" />
+    <Folder Include="auctions\static\admin\fonts" />
+    <Folder Include="auctions\static\admin\img" />
+    <Folder Include="auctions\static\admin\img\gis" />
+    <Folder Include="auctions\static\admin\js" />
+    <Folder Include="auctions\static\admin\js\admin" />
+    <Folder Include="auctions\static\admin\js\vendor\jquery" />
+    <Folder Include="auctions\static\admin\js\vendor\select2" />
+    <Folder Include="auctions\static\admin\js\vendor\select2\i18n" />
+    <Folder Include="auctions\static\admin\js\vendor\xregexp" />
+    <Folder Include="auctions\static\auctions" />
+    <Folder Include="auctions\templates\auctions" />
+    <Folder Include="commerce" />
+    <Folder Include="staticfiles\admin\css" />
+    <Folder Include="staticfiles\admin\css\vendor\select2" />
+    <Folder Include="staticfiles\admin\fonts" />
+    <Folder Include="staticfiles\admin\img" />
+    <Folder Include="staticfiles\admin\img\gis" />
+    <Folder Include="staticfiles\admin\js" />
+    <Folder Include="staticfiles\admin\js\admin" />
+    <Folder Include="staticfiles\admin\js\vendor\jquery" />
+    <Folder Include="staticfiles\admin\js\vendor\select2" />
+    <Folder Include="staticfiles\admin\js\vendor\select2\i18n" />
+    <Folder Include="staticfiles\admin\js\vendor\xregexp" />
+    <Folder Include="staticfiles\auctions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="venv\">
+      <Id>venv</Id>
+      <Description>venv (Python 3.8 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <Version>3.8</Version>
+      <Architecture>X64</Architecture>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+    </Interpreter>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>

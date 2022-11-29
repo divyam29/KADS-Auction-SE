@@ -24,10 +24,6 @@ def patientotpSignup(request):
     if request.method == 'POST':
         phone_number = request.POST['phone']
         profile = Profile.objects.filter(contact_no=phone_number)
-
-        # print(profile[0])
-        # print(profile[0].otp)
-        # print(profile[0].uid)
         if not profile.exists():
             return render(request=request, template_name="auctions/login.html",)
         user_profile = profile[0]
